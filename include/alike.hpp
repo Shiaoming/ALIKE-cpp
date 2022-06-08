@@ -54,9 +54,9 @@ namespace alike
               float scores_th = 0.1,
               int n_limit = 9999,
               bool subpixel = false) : mJitModel(torch::jit::load(model_path)),
-                                   mDevice((cuda) ? torch::kCUDA : torch::kCPU),
-                                   mSubPixel(subpixel),
-                                   mDkd(radius, top_k, scores_th, n_limit, subpixel)
+                                       mDevice((cuda) ? torch::kCUDA : torch::kCPU),
+                                       mSubPixel(subpixel),
+                                       mDkd(radius, top_k, scores_th, n_limit, subpixel)
         {
             mJitModel.to(mDevice);
             mJitModel.eval();
@@ -154,14 +154,14 @@ namespace alike
 
         void extactAndDetectAndCompute(torch::Tensor &img_tensor,
                                        torch::Tensor &keypoints,
-                              torch::Tensor &dispersitys,
-                              torch::Tensor &kptscores,
-                              torch::Tensor &descriptors)
+                                       torch::Tensor &dispersitys,
+                                       torch::Tensor &kptscores,
+                                       torch::Tensor &descriptors)
         {
             torch::Tensor score_map, descriptor_map;
 
             extract(img_tensor, score_map, descriptor_map);
-            detectAndCompute(score_map, descriptor_map, keypoints, dispersitys,kptscores, descriptors);
+            detectAndCompute(score_map, descriptor_map, keypoints, dispersitys, kptscores, descriptors);
         }
 
         void toOpenCVFormat(torch::Tensor &keypoints_t,
@@ -188,7 +188,8 @@ namespace alike
             descriptors = tensor2Mat(descriptors_t);
         }
 
-            private : DKD mDkd;
+    private:
+        DKD mDkd;
         bool mSubPixel;
         torch::jit::script::Module mJitModel;
         torch::Device mDevice;

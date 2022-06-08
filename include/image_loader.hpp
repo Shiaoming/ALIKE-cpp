@@ -117,9 +117,7 @@ namespace alike
             case VIDEO:
                 ret = mCap.read(frame);
                 if (!ret)
-
                     std::cout << "Can't receive frame (stream end?). Exiting ..." << std::endl;
-
                 break;
             case IMAGES:
                 if (mIdx >= mImageList.size())

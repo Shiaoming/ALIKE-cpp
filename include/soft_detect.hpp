@@ -189,8 +189,6 @@ namespace alike
         }
 
     private:
-        
-    private:
         int mRadius;
         int mKernelSize;
         int mTopK;
